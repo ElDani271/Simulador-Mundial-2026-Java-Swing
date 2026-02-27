@@ -99,7 +99,7 @@ public class PantallaDelGrupo extends JFrame {
                             int[] goles = Equipo.simularPartido(dl.getlocal(), dl.getvisitante());
                             Bib.asignarGolesADuelo(dl.getlocal(), dl.getvisitante(), gr.getCalendarioList().indexOf(fecha), goles[0], goles[1], gr.getCalendarioList());
                             Equipo.jugarPartido(dl.getlocal(), dl.getvisitante(), goles[0], goles[1]);
-                            
+                            gr.pantalla.ordenarTabla(gr.getEquipoList(), tablaLabels, pTabla);
                             InterfazGrupos.crearInterfazGrupos();
                             InterfazGrupos.frame1.setVisible(true);
                             gr.pantalla.setVisible(true);
@@ -107,7 +107,6 @@ public class PantallaDelGrupo extends JFrame {
                         }
                     }
                 }
-                gr.pantalla.ordenarTabla(gr.getEquipoList(), tablaLabels, pTabla);
             }
         });
 

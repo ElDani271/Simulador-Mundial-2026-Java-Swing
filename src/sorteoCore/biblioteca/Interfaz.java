@@ -2,6 +2,7 @@ package sorteoCore.biblioteca;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -68,6 +69,7 @@ public class Interfaz {
         JLabel labelCentro = new JLabel("Bienvenido al sorteo");
         labelCentro.setForeground(Color.white);
         JButton startButton = new JButton("Iniciar sorteo");
+        startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         JPanel panelCentro_1 = new JPanel(new FlowLayout()); //SUBPANEL 1
         panelCentro_1.setBackground(new Color(255,255,255,50));
@@ -110,6 +112,8 @@ public class Interfaz {
             
             JButton sigEqButton = new JButton("Sortear siguiente equipo");
             JButton autoSortButton = new JButton("Sorteo automático");
+            sigEqButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            autoSortButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
             panelCentro_1.remove(startButton);
             panelCentro_1.add(sigEqButton);
             panelCentro_1.add(autoSortButton);
@@ -133,6 +137,7 @@ public class Interfaz {
                 }
 
                 JButton asignButton = new JButton("Asignar equipo");
+                asignButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 prepararVistaEquipo(eqElegido, panelCentro_2, panelCentro);
                 
 
@@ -226,6 +231,7 @@ public class Interfaz {
         welcomePanel.setLayout(new FlowLayout());
         JLabel label = new JLabel("Bienvenido al sorteo");
         JButton startButton = new JButton("Iniciar sorteo");
+        startButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         welcomePanel.add(label);
         welcomePanel.add(startButton);
 
@@ -354,6 +360,7 @@ public class Interfaz {
             frame1.remove(panelLateral);
             
             JButton endBtn = new JButton("Comenzar torneo");
+            endBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
             
             panelCentro_1.add(labelCentro);
             panelCentro_1.add(endBtn);
