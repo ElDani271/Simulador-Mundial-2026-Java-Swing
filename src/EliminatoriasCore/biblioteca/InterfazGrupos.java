@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
@@ -57,7 +59,7 @@ public class InterfazGrupos {
         
         anadirpCentro1(gruposEstaticos, pCentro1);
         
-        JPanel pLateral = new JPanel(new GridLayout(15,1));
+        JPanel pLateral = new JPanel(new BorderLayout());
 
         abrir3rosBtn.setBackground(new Color(193, 159, 85));
         abrir3rosBtn.setFocusPainted(false);
@@ -68,13 +70,30 @@ public class InterfazGrupos {
             pLateral.setVisible(true);
         }
 
+        JButton abrirElimDirect = new JButton("Eliminación directa");
+        abrirElimDirect.setBackground(new Color(193, 159, 85));
+        abrirElimDirect.setFocusPainted(false);
+        abrirElimDirect.addActionListener(e->{
+            ElimDirect.main(null);
+        });
+
         JPanel pNorth = new JPanel(new BorderLayout());
         pNorth.setOpaque(false);
+
+        JPanel pNorth1 = new JPanel(new FlowLayout());
+        pNorth1.add(abrirElimDirect);
+        pNorth1.setOpaque(false);
+
+        
+        
         pNorth.add(abrir3rosBtn, BorderLayout.EAST);
         JLabel lTitle = new JLabel("FASE DE GRUPOS");
         lTitle.setFont(new Font("Arial", Font.BOLD, 16));
         lTitle.setForeground(Color.WHITE);
-        pNorth.add(lTitle);
+
+        pNorth.add(pNorth1, BorderLayout.CENTER);
+
+        pNorth.add(lTitle, BorderLayout.WEST);
         pCentro.add(pNorth, BorderLayout.NORTH);
 
         abrir3rosBtn.addActionListener(e->{
@@ -153,12 +172,33 @@ public class InterfazGrupos {
         
         pLateral.setBackground(new Color(0,0,0,100));
         pLateral.setBorder(new EmptyBorder(30,30,30,30));
-        
+
+        JPanel pLateral1 = new JPanel(new GridLayout(15,1));
+        JPanel pLateral2 = new JPanel(new GridLayout(15,2));
+        pLateral1.setOpaque(false);
+        pLateral2.setOpaque(false);
+
         Grupo terceros = new Grupo("3rds", new ArrayList<>());
         for (Grupo grupo2 : gruposEstaticos) {
             terceros.getEquipoList().add(grupo2.getEquipoList().get(2));
         }
-        anadirGrupo(terceros, pLateral);
+        Grupo.ordenarEquiposBurbuja(terceros.getEquipoList());
+        anadirGrupo(terceros, pLateral1);
+        UIManager.put("Label.foreground", Color.WHITE);
+        pLateral2.add(new JLabel("DF"));
+        pLateral2.add(new JLabel("Pun"));
+        for (Equipo e : terceros.getEquipoList()) {
+            JLabel l = new JLabel(String.valueOf(e.getDifGol()), SwingConstants.CENTER);
+            l.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
+            pLateral2.add(l);
+            JLabel l2 = new JLabel(String.valueOf(e.getPuntos()), SwingConstants.CENTER);
+            l2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
+            pLateral2.add(l2);
+        }
+        UIManager.put("Label.foreground", Color.BLACK);
+        pLateral.add(pLateral1, BorderLayout.CENTER);
+        pLateral.add(pLateral2, BorderLayout.EAST);
+
         Grupo.ordenarEquiposBurbuja(terceros.getEquipoList());
 
         
@@ -169,6 +209,10 @@ public class InterfazGrupos {
         JLabel[] lEq = new JLabel[grupo.getEquipoList().size()];
         //Reutilizamos variable temp para el titulo y para mover el orden de los eqs en "orden intercalado"
         JLabel temp = new JLabel("GRUPO " + grupo.getNombre());
+        if (grupo.getEquipoList().size() == 12) {
+            temp.setText("GRUPO " + grupo.getNombre());
+            temp.setForeground(Color.white);
+        }
         
         panel.add(temp);
 
@@ -180,11 +224,10 @@ public class InterfazGrupos {
             if (grupo.getEquipoList().get(i) != null) {
                 lEq[i].setFont(new Font("Arial", Font.BOLD, 12));
                 if (lEq.length == 4){
-                    lEq[i].setText(grupo.getEquipoList().get(i).getNombre().toUpperCase());
+                    lEq[i].setText(grupo.getEquipoList().get(i).getNombre());
 
                 } else if (lEq.length == 12) {
                     lEq[i].setText(grupo.getEquipoList().get(i).getNombre().toUpperCase().substring(0,3));
-
                 }
                 lEq[i].setIcon(grupo.getEquipoList().get(i).getImg());
                 lEq[i].setHorizontalAlignment(SwingConstants.LEFT);

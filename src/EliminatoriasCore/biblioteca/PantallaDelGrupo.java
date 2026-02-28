@@ -101,7 +101,6 @@ public class PantallaDelGrupo extends JFrame {
                             Equipo.jugarPartido(dl.getlocal(), dl.getvisitante(), goles[0], goles[1]);
                             gr.pantalla.ordenarTabla(gr.getEquipoList(), tablaLabels, pTabla);
                             InterfazGrupos.crearInterfazGrupos();
-                            InterfazGrupos.frame1.setVisible(true);
                             gr.pantalla.setVisible(true);
                             azarBtn.setEnabled(false);
                         }

@@ -5,7 +5,6 @@ import Global.Equipo;
 import Global.Grupo;
 
 public class Data {
-    private static ArrayList<Equipo> tablaEquipos = new ArrayList<>();
     private static ArrayList<Equipo> equipoList = new ArrayList<>();
     private static ArrayList<ArrayList<Duelo>> calendarioList = new ArrayList<>();
 
@@ -53,12 +52,6 @@ public class Data {
     }
     public static void setGrupos(Grupo[] grupos) {
         Data.grupos = grupos;
-    }
-    public static ArrayList<Equipo> getTablaEquipos() {
-        return tablaEquipos;
-    }
-    public static void setTablaEquipos(ArrayList<Equipo> tablaEquipos) {
-        Data.tablaEquipos = tablaEquipos;
     }
     public static ArrayList<Equipo> getEquipoList() {
         return equipoList;
