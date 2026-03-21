@@ -3,8 +3,7 @@ package Global;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import EliminatoriasCore.biblioteca.Duelo;
-import EliminatoriasCore.biblioteca.PantallaDelGrupo;
+import FaseGruposCore.biblioteca.PantallaDelGrupo;
 
 public class Grupo {
     private String nombre;
@@ -36,6 +35,9 @@ public class Grupo {
         this.equipoList = equipoList;
     }
 
+    public Grupo() {
+        //TODO Auto-generated constructor stub
+    }
     public void generarPartidos() {
             ArrayList<Duelo> fecha1 = new ArrayList<>();
             fecha1.add(new Duelo(this.getEquipoList().get(0), this.getEquipoList().get(1)));

@@ -6,13 +6,15 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-import EliminatoriasCore.biblioteca.PantallaDelGrupo;
+import FaseGruposCore.biblioteca.PantallaDelGrupo;
 
 public class Equipo {
     private String nombre;
     private int ranking;
     private String confederacion;
     private int bombo;
+    private int grupoOriginal;
+    
     private ImageIcon img;
     private int partidosJugados = 0, partidosGanados = 0, partidosEmpatados = 0, partidosPerdidos = 0, golesFavor = 0, golesContra = 0, difGol = 0, puntos = 0;
     private int posActual = -1, posAnterior = -1;
@@ -26,7 +28,7 @@ public class Equipo {
         this.ranking = ranking;
         this.puntos = 0;
         this.confederacion = confederacion;
-        ImageIcon iconoOriginal1 = new ImageIcon(PantallaDelGrupo.class.getResource("/EliminatoriasCore/images/sinjugar.png"));
+        ImageIcon iconoOriginal1 = new ImageIcon(PantallaDelGrupo.class.getResource("/FaseGruposCore/images/sinjugar.png"));
         Image imgEscalada1 = iconoOriginal1.getImage().getScaledInstance(13,13, Image.SCALE_SMOOTH);
         for (int i = 0; i < 5; i++) {
             this.ultimosResultados.add(new ImageIcon(imgEscalada1));
@@ -50,7 +52,7 @@ public class Equipo {
         this.puntos = 0;
         this.confederacion = confederacion;
 
-        ImageIcon iconoOriginal1 = new ImageIcon(PantallaDelGrupo.class.getResource("/EliminatoriasCore/images/sinjugar.png"));
+        ImageIcon iconoOriginal1 = new ImageIcon(PantallaDelGrupo.class.getResource("/FaseGruposCore/images/sinjugar.png"));
         Image imgEscalada1 = iconoOriginal1.getImage().getScaledInstance(13,13, Image.SCALE_SMOOTH);
         for (int i = 0; i < 5; i++) {
             this.ultimosResultados.add(new ImageIcon(imgEscalada1));
@@ -71,7 +73,7 @@ public class Equipo {
         this.nombre = nombre;
         this.puntos = puntos;
         this.ranking = ranking;
-        ImageIcon iconoOriginal = new ImageIcon(PantallaDelGrupo.class.getResource("/EliminatoriasCore/images/sinjugar.png"));
+        ImageIcon iconoOriginal = new ImageIcon(PantallaDelGrupo.class.getResource("/FaseGruposCore/images/sinjugar.png"));
         Image imgEscalada = iconoOriginal.getImage().getScaledInstance(13,13, Image.SCALE_SMOOTH);
         for (int i = 0; i < 5; i++) {
             this.ultimosResultados.add(new ImageIcon(imgEscalada));
@@ -88,9 +90,13 @@ public class Equipo {
         }
     }
 
+    public Equipo(String nombre) {
+        this.nombre = nombre;
+    }
+
     public void actualizarImg(String nombre) {
         try {
-            ImageIcon iconoOriginal = new ImageIcon(getClass().getResource("/sorteoCore/images/banderas/" + nombre + ".png"));
+            ImageIcon iconoOriginal = new ImageIcon(getClass().getResource("/FaseSorteoCore/images/banderas/" + nombre + ".png"));
             Image imgOriginal = iconoOriginal.getImage();
             int anchoOriginal = iconoOriginal.getIconWidth();
             int altoOriginal = iconoOriginal.getIconHeight();
@@ -133,8 +139,8 @@ public class Equipo {
         int golesA = generarGoles(ventajaA);
         int golesB = generarGoles(ventajaB);
 
-        String res = String.format("%s %d - %d %s", eqA.getNombre(), golesA, golesB, eqB.getNombre());
-        System.out.println(res);
+        /*String res = String.format("%s %d - %d %s", eqA.getNombre(), golesA, golesB, eqB.getNombre());
+        System.out.println(res);*/
 
         int[] goles = {golesA,golesB};
 
@@ -191,11 +197,11 @@ public class Equipo {
             String rutaIcono;
             
             if (this.posActual < this.posAnterior) {
-                rutaIcono = "/EliminatoriasCore/images/subio.png";
+                rutaIcono = "/FaseGruposCore/images/subio.png";
             } else if (this.posActual > this.posAnterior) {
-                rutaIcono = "/EliminatoriasCore/images/bajo.png";
+                rutaIcono = "/FaseGruposCore/images/bajo.png";
             } else {
-                rutaIcono = "/EliminatoriasCore/images/mantuvo.png";
+                rutaIcono = "/FaseGruposCore/images/mantuvo.png";
             }
             
             // Crear ImageIcon directamente
@@ -209,11 +215,11 @@ public class Equipo {
         String rutaIcono = "";
         boolean error = false;
         if (resultadoActual.equals("gano")) {
-            rutaIcono = "/EliminatoriasCore/images/gano.png";
+            rutaIcono = "/FaseGruposCore/images/gano.png";
         } else if (resultadoActual.equals("perdio")) {
-            rutaIcono = "/EliminatoriasCore/images/perdio.png";
+            rutaIcono = "/FaseGruposCore/images/perdio.png";
         } else if (resultadoActual.equals("empato")) {
-            rutaIcono = "/EliminatoriasCore/images/empato.png";
+            rutaIcono = "/FaseGruposCore/images/empato.png";
         } else {
             error = true;
         }
@@ -338,5 +344,11 @@ public class Equipo {
     }
     public void setUltimosResultados(LinkedList<ImageIcon> ultimosResultados) {
         this.ultimosResultados = ultimosResultados;
+    }
+    public void setGrupoOriginal(int grupoOriginal) {
+        this.grupoOriginal = grupoOriginal;
+    }
+    public int getGrupoOriginal() {
+        return grupoOriginal;
     }
 }
